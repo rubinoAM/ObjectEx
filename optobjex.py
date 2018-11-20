@@ -4,18 +4,25 @@ class Person(object):
         self.email = email
         self.phone = phone
         self.friends = []
+        self.people_greeted = []
+        self.num_greeted = 0
         self.greeting_count = 0
     def __repr__(self):
         return '%s: %s | %s' % (self.name, self.email, self.phone)
     def greet(self, other_person):
         print ("Howdy, %s! I'm %s!" % (other_person.name, self.name))
         self.greeting_count += 1
+        if other_person.name not in self.people_greeted:
+            self.people_greeted.append(other_person.name)
+            self.num_greeted += 1
     def print_contact_info(self):
         print (self.name + '\'s email: ' + self.email + ', ' + self.name + '\'s phone number: ' + self.phone)
     def add_friend(self, other_person):
         self.friends.append(other_person)
     def num_friends(self):
         print (len(self.friends))
+    def num_unique_people_greeted(self):
+        print (len(self.people_greeted))
 
 sonny = Person("Sonny","sonny@hotmail.com","483-485-4948")
 jordan = Person("Jordan","jordan@aol.com","495-586-3456")
@@ -47,4 +54,6 @@ jordan.num_friends()
 print (sonny.greeting_count)
 print (jordan.__repr__()) # You need to call __repr__() as a method for it to render as the literal string you want it to.
 
+sonny.num_unique_people_greeted()
 sonny.greet(dee_dee)
+sonny.num_unique_people_greeted()
